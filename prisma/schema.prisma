@@ -9,7 +9,7 @@ datasource db {
 
 model hystoricalwinddata {
   id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  avarage   String?
-  max       String?
+  createdat DateTime @default(now())
+  avarage   Float?
+  max       Float?
 }

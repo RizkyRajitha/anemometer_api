@@ -8,27 +8,63 @@ app.use(cors());
 require("./lib/mqttHandler");
 const db = require("./lib/dbFunc");
 
-app.get("/", (req, res) => {
-  res.json({ message: "anonmeter" });
-});
-
-app.get("/all", async (req, res) => {
-  let data = await db.findData();
-  console.log(data);
-  res.json({ data });
-});
-
-app.get("/insert", async (req, res) => {
+app.get("/getdatalastday", async (req, res) => {
   try {
-    let data = await db.insertData(
-      String(Math.floor((Math.random() * 100) % 50)),
-      String(Math.floor((Math.random() * 100) % 50))
-    );
+    let data = await db.findDataLastDay();
     console.log(data);
     res.json({ data });
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
+});
+
+app.get("/getdatalastweek", async (req, res) => {
+  try {
+    let data = await db.findDataLastWeek();
+    console.log(data);
+    res.json({ data });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+});
+
+app.get("/getdatalastmonth", async (req, res) => {
+  try {
+    let data = await db.findDataLastMonth();
+    console.log(data);
+    res.json({ data });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+});
+
+app.get("/getall", async (req, res) => {
+  try {
+    let data = await db.findAll();
+    console.log(data);
+    res.json({ data });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+});
+
+console.log(new Date());
+
+// app.get("/insert", async (req, res) => {
+//   try {
+//     let data = await db.insertData(
+//       String(Math.floor((Math.random() * 100) % 50)),
+//       String(Math.floor((Math.random() * 100) % 50))
+//     );
+//     console.log(data);
+//     res.json({ data });
+//   } catch (error) {
+//     res.status(500).json({ msg: error.message });
+//   }
+// });
+
+app.get("/", (req, res) => {
+  res.json({ message: "anonmeter" });
 });
 
 app.listen(PORT, () => {
