@@ -1,0 +1,34 @@
+version: "3"
+services:
+  anomemeter-service:
+    build: "."
+    environment:
+      - DATABASE_URL=postgresql://postgres:123@anomemeter-service-db:5432/postgres?schema=public
+    depends_on:
+      - anomemeter-service-db
+    ports:
+      - 3001:3001
+    # volumes:
+    #   - ./listing-service:/opt/app
+
+  anomemeter-service-db:  
+    environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=123
+    image: postgres:10-alpine
+    restart: always
+    volumes:
+        - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+volumes:
+    postgres:
+
+    #   docker pull postgres:10-alpine
+
+  # classfeild-service:
+  # build: "./classfeild-service"
+  # depends_on:
+  # - classfeild-service-db
+  # volumes:
+  #     - ./classfeild-service:/opt/app

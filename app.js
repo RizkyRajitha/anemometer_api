@@ -50,18 +50,18 @@ app.get("/getall", async (req, res) => {
 
 console.log(new Date());
 
-// app.get("/insert", async (req, res) => {
-//   try {
-//     let data = await db.insertData(
-//       String(Math.floor((Math.random() * 100) % 50)),
-//       String(Math.floor((Math.random() * 100) % 50))
-//     );
-//     console.log(data);
-//     res.json({ data });
-//   } catch (error) {
-//     res.status(500).json({ msg: error.message });
-//   }
-// });
+app.get("/insert", async (req, res) => {
+  try {
+    let data = await db.insertData(
+      Math.floor((Math.random() * 100) % 50),
+      Math.floor((Math.random() * 100) % 50)
+    );
+    console.log(data);
+    res.json({ data });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+});
 
 app.get("/", (req, res) => {
   res.json({ message: "anonmeter" });
