@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 
 require("./lib/mqttHandler");
-const db = require("./lib/dbFunc");
+const db = require("./lib/dbFuncv2");
 
 app.get("/getdatalastday", async (req, res) => {
   try {
